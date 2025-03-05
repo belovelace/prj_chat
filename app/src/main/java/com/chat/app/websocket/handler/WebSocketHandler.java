@@ -42,7 +42,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         //클라이언트가 보낸 메세지를 역직렬화
         String json = message.getPayload();
-
     }
 
 
