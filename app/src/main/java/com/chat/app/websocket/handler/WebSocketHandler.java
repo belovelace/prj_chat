@@ -1,5 +1,6 @@
 package com.chat.app.websocket.handler;
 
+import com.chat.app.websocket.vo.ChatMessageVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,12 +8,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
-import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -52,6 +50,23 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String json = message.getPayload();
         log.info("[수신 메세지]: {}", json);
        //역직렬화
+        try {
+            // 예를 들어, ChatMessage VO로 역직렬화 (ChatMessage 클래스는 별도로 구현)
+            ChatMessageVo chatMessageVo = objectMapper.readValue(json, ChatMessageVo.class);
+            log.info("역직렬화된 메시지: {}", chatMessageVo);
+
+            // 여기서 추가로 DB 저장 또는 메시지 브로드캐스트 등 처리 가능
+            // 모든 연결된 세션에 메시지 전송
+            String broadcastJson = objectMapper.writeValueAsString(chatMessageVo);
+            TextMessage broadcastMessage = new TextMessage(broadcastJson);
+            for (WebSocketSession wsSession : sessions) {
+                wsSession.sendMessage(broadcastMessage);
+            }
+        } catch (Exception e) {
+            log.error("메시지 처리 중 오류 발생", e);
+        }
+
+
     }
 
 
