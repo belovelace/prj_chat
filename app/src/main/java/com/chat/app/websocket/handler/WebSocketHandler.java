@@ -1,6 +1,6 @@
 package com.chat.app.websocket.handler;
 
-import com.chat.app.websocket.vo.ChatMessageVo;
+import com.chat.app.websocket.vo.WebSocketVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +17,12 @@ import java.util.Set;
  * 웹 소켓 연결을 처리하는 핸들러 클래스
  * 서버에서 발송한 메세지를 처리하는 역할
  * 소켓통신 특성상 1:n 관계. 즉, 한 서버에 여러 클라이언트 접속 가능
+ * -----------------------------------------------------------
+ * 역할
+ * 1. 클라이언트로 부터 메시지 수신
+ * 2. JSON 문자열을 VO로 역직렬화
+ * 3. 세션 메시지 브로드캐스트
+ * 4. 세션 관리
  */
 
 @Slf4j
@@ -51,8 +57,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
         log.info("[수신 메세지]: {}", json);
        //역직렬화
         try {
-            // 예를 들어, ChatMessage VO로 역직렬화 (ChatMessage 클래스는 별도로 구현)
-            ChatMessageVo chatMessageVo = objectMapper.readValue(json, ChatMessageVo.class);
+            // 예를 들어, WebSocket VO로 역직렬화 (ChatMessage 클래스는 별도로 구현)
+            WebSocketVo chatMessageVo = objectMapper.readValue(json, WebSocketVo.class);
             log.info("역직렬화된 메시지: {}", chatMessageVo);
 
             // 여기서 추가로 DB 저장 또는 메시지 브로드캐스트 등 처리 가능

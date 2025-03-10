@@ -10,6 +10,12 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+
+/**
+ * 웹 소켓 연결 설정, cors 정책, 엔드포인트 담당
+ * cors 정책 모두 허용함
+ * 엔드포인트 /ws/chat
+ */
 @Configuration
 @EnableWebSocket
 @RequiredArgsConstructor
