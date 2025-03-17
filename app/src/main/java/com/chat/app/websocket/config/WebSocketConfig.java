@@ -30,7 +30,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new WebSocketHandler(), "/ws/chat")
+        registry.addHandler(webSocketHandler(), "/ws/chat")
                 .setAllowedOrigins("*"); // CORS 정책 허용
     }
 
