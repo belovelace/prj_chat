@@ -1,6 +1,7 @@
 package com.chat.app.friends.mapper;
 
 import com.chat.app.friends.vo.FriendsVo;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -17,6 +18,13 @@ public interface FriendsMapper {
             "JOIN MEMBER M ON F.FRIEND_ID = M.ID\n" +
             "WHERE F.USER_ID = #{id} AND F.STATUS = 'accepted';")
     List<FriendsVo> getShowList(String memberId);
+
+
+    //친구 추가
+    @Insert("INSERT INTO FRIENDS (USER_ID, FRIEND_ID, STATUS\t)\n" +
+            "VALUES (#{id}, #{friends_id}, #{status});")
+    List<FriendsVo> addList(String memberId);
+
 
 
 

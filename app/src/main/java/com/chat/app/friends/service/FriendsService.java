@@ -20,6 +20,9 @@ public class FriendsService {
     //친구 목록 조회
     public List<FriendsVo> getShowList(String memberId) {return dao.getShowList(memberId);}
 
+    //친구 추가
+    public List<FriendsVo> addList(String memberId) {return dao.addList(memberId);}
+
 
     //친구 목록 삽입 (친구추가)
 

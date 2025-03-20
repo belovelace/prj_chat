@@ -18,6 +18,8 @@ public class FriendsDao {
     //친구 목록 조회
     public List<FriendsVo> getShowList(String memberId) {return mapper.getShowList(memberId);}
 
+    //친구 추가
+    public List<FriendsVo> addList(String memberId) {return mapper.addList(memberId);}
 
 
     //친구 목록 삽입 (친구추가)
