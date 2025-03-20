@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WebSocketController {
 
     //채팅방 화면
-    @GetMapping("show/websocket")
+    @GetMapping("showChatRoom")
     public String index() {return "websocket/chatRoom";}
 
 
